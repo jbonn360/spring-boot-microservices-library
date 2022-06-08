@@ -9,7 +9,6 @@ import org.springframework.stereotype.Component;
 
 import com.netflix.zuul.ZuulFilter;
 import com.netflix.zuul.context.RequestContext;
-import com.netflix.zuul.exception.ZuulException;
 
 @Component
 public class SessionSavingZuulPreFilter extends ZuulFilter {
@@ -23,7 +22,7 @@ public class SessionSavingZuulPreFilter extends ZuulFilter {
 	}
 
 	@Override
-	public Object run() throws ZuulException {
+	public Object run() /* throws ZuulException */ {
 		RequestContext context = RequestContext.getCurrentContext();
 		HttpSession httpSession = context.getRequest().getSession();
 		Session session = repository.getSession(httpSession.getId());
